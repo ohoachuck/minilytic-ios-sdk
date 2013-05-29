@@ -31,6 +31,7 @@
 		491836451753F47D001CE6B2 /* WLYDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 491836441753F47D001CE6B2 /* WLYDevice.m */; };
 		4918364817541C5D001CE6B2 /* WLYHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4918364717541C5D001CE6B2 /* WLYHTTPRequest.m */; };
 		4918364A17541D38001CE6B2 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4918364917541D38001CE6B2 /* libz.dylib */; };
+		49E8A0521756494B00AAE830 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 49E8A0511756494B00AAE830 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +69,7 @@
 		4918364617541C5D001CE6B2 /* WLYHTTPRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WLYHTTPRequest.h; path = ../../weblytic/src/WLYHTTPRequest.h; sourceTree = "<group>"; };
 		4918364717541C5D001CE6B2 /* WLYHTTPRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WLYHTTPRequest.m; path = ../../weblytic/src/WLYHTTPRequest.m; sourceTree = "<group>"; };
 		4918364917541D38001CE6B2 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		49E8A0511756494B00AAE830 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,8 +90,8 @@
 		491835F91753B55D001CE6B2 = {
 			isa = PBXGroup;
 			children = (
-				4918364917541D38001CE6B2 /* libz.dylib */,
 				4918360B1753B55D001CE6B2 /* Sample */,
+				49E8A0501756493200AAE830 /* Doc */,
 				491836041753B55D001CE6B2 /* Frameworks */,
 				491836031753B55D001CE6B2 /* Products */,
 			);
@@ -106,6 +108,7 @@
 		491836041753B55D001CE6B2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4918364917541D38001CE6B2 /* libz.dylib */,
 				491836051753B55D001CE6B2 /* UIKit.framework */,
 				491836071753B55D001CE6B2 /* Foundation.framework */,
 				491836091753B55D001CE6B2 /* CoreGraphics.framework */,
@@ -163,6 +166,14 @@
 				4918364717541C5D001CE6B2 /* WLYHTTPRequest.m */,
 			);
 			name = weblytic;
+			sourceTree = "<group>";
+		};
+		49E8A0501756493200AAE830 /* Doc */ = {
+			isa = PBXGroup;
+			children = (
+				49E8A0511756494B00AAE830 /* README.md */,
+			);
+			name = Doc;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -229,6 +240,7 @@
 				491836301753B55D001CE6B2 /* FirstViewController_iPad.xib in Resources */,
 				491836331753B55D001CE6B2 /* SecondViewController_iPhone.xib in Resources */,
 				491836361753B55D001CE6B2 /* SecondViewController_iPad.xib in Resources */,
+				49E8A0521756494B00AAE830 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -395,6 +407,7 @@
 				4918363B1753B55D001CE6B2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
