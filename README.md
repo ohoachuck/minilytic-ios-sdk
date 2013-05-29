@@ -24,3 +24,7 @@ TRY IT OUT
 ### libz
 
 ### ARC
+
+## License
+
+weblytic iOS SDK is available under the [WTFPL license](http://en.wikipedia.org/wiki/WTFPL). See the LICENSE file for more info.
