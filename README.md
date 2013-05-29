@@ -3,7 +3,7 @@ weblytic-ios-sdk
 
 Analytics for the anti-analytics
 
-This open-source library allows you to weblytic analytics SDK into your iOS app.
+This open-source library allows you to integrate weblytic analytics SDK into your iOS app.
 
 You simply track an event like this:
  
