@@ -1,7 +1,7 @@
 weblytic-ios-sdk
 ================
 
-weblytic iOS SDK: analytics for the anti-analytics
+Analytics for the anti-analytics
 
 You simply track an event like this:
  
