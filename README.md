@@ -1,4 +1,4 @@
-weblytic-ios-sdk
+weblytic iOS SDK
 ================
 
 Analytics for the anti-analytics
@@ -17,6 +17,7 @@ Tracking an event is just recording a lightweight instance of this event in memo
 TRY IT OUT
 
 1. Test your install; build and run the project at ~/Documents/weblytic-ios-sdk/Sample/Sample.xcodeproj
+2. There is no step 2.
 
 ## Requirements
 
