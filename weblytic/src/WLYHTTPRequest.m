@@ -6,54 +6,148 @@
 //
 
 #import "WLYHTTPRequest.h"
-#import <zlib.h>
+
+
+
+@interface WLYHTTPRequest ( )
+
+@property(nonatomic,assign) UIBackgroundTaskIdentifier backgroundTaskId;
+@property(nonatomic,strong) NSMutableURLRequest *request;
+@property(nonatomic,strong) NSURLConnection *connection;
+@property(nonatomic,assign) WLYHTTPRequestState state;
+
+
+@end
+
 
 @implementation WLYHTTPRequest
 
-- (NSData *)GZIPDataWithData:(NSData*)uncompressedData;
+#pragma mark - Entry point
+
+- (id)init
 {
-    if ([uncompressedData length] == 0) {
-        return uncompressedData;
+    self = [super init];
+    if (self){
+        NSURL *url = [NSURL URLWithString:@"http://weblytic.com/api/v1/hits/"];
+        _request = [NSMutableURLRequest requestWithURL:url];
+        [_request setHTTPMethod:@"POST"];
+        _state = WLYHTTPRequestStateReady;
     }
-    
-    z_stream zStream;
-    bzero(&zStream, sizeof(z_stream));
-    
-    zStream.zalloc = Z_NULL;
-    zStream.zfree = Z_NULL;
-    zStream.opaque = Z_NULL;
-    zStream.next_in = (Bytef *)[uncompressedData bytes];
-    zStream.avail_in = (unsigned int)[uncompressedData length];
-    zStream.total_out = 0;
-    
-    OSStatus status;
-    if ((status = deflateInit(&zStream, Z_DEFAULT_COMPRESSION)) != Z_OK) {
-        return nil;
-    }
-    
-    NSMutableData *compressedData = [NSMutableData dataWithLength:1024];
-    
-    do {
-        if ((status == Z_BUF_ERROR) || (zStream.total_out == [compressedData length])) {
-             [compressedData increaseLengthBy:1024];
-        }
-        
-        zStream.next_out = [compressedData mutableBytes] + zStream.total_out;
-        zStream.avail_out = (unsigned int)([compressedData length] - zStream.total_out);
-        
-        status = deflate(&zStream, Z_FINISH);
-    } while ((status == Z_OK) || (status == Z_BUF_ERROR));
-    
-    deflateEnd(&zStream);
-    
-    if ((status != Z_OK) && (status != Z_STREAM_END)) {
-        return nil;
-    }
-    
-    [compressedData setLength:zStream.total_out];
-    
-    return compressedData;
+    return self;
 }
+
+- (void)main
+{
+    @autoreleasepool {
+        [self start];
+    }
+}
+
+- (void) start
+{
+    self.backgroundTaskId = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (self.backgroundTaskId != UIBackgroundTaskInvalid){
+                [[UIApplication sharedApplication] endBackgroundTask:self.backgroundTaskId];
+                self.backgroundTaskId = UIBackgroundTaskInvalid;
+                [self cancel];
+            }
+        });
+    }];
+    
+    
+    if(!self.isCancelled) {
+        [self.request setHTTPBody:self.body];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.connection = [[NSURLConnection alloc] initWithRequest:self.request
+                                                              delegate:self
+                                                      startImmediately:NO];
+            
+            [self.connection scheduleInRunLoop:[NSRunLoop currentRunLoop]
+                                       forMode:NSRunLoopCommonModes];
+            
+            [self.connection start];
+        });
+        self.state = WLYHTTPRequestStateExecuting;
+    }
+    else {
+        self.state =WLYHTTPRequestStateStateFinished;
+        [self endBackgroundTask];
+    }
+}
+
+#pragma - mark NSOperation stuff
+
+- (BOOL)isConcurrent
+{
+    return YES;
+}
+
+- (BOOL)isReady {
+    
+    return (self.state == WLYHTTPRequestStateReady && [super isReady]);
+}
+
+
+- (BOOL)isFinished
+{
+    return (self.state == WLYHTTPRequestStateStateFinished);
+}
+
+- (BOOL)isExecuting {
+    
+    return (self.state == WLYHTTPRequestStateExecuting);
+}
+
+- (void)endBackgroundTask
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (self.backgroundTaskId != UIBackgroundTaskInvalid) {
+            [[UIApplication sharedApplication] endBackgroundTask:self.backgroundTaskId];
+            self.backgroundTaskId = UIBackgroundTaskInvalid;
+        }
+    });
+}
+
+- (void)cancel
+{
+    if([self isFinished])
+        return;
+    
+    @synchronized(self) {
+        //self.isCancelled = YES;
+        [self.connection cancel];
+        if(self.state == WLYHTTPRequestStateExecuting){
+            self.state = WLYHTTPRequestStateStateFinished;
+        }
+        [self endBackgroundTask];
+    }
+    [super cancel];
+}
+
+#pragma mark -
+#pragma mark NSURLConnection delegates
+
+#pragma mark -
+#pragma mark NSURLConnection delegates
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
+{
+    self.body = nil;
+    [self endBackgroundTask];
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
+{
+    self.body = nil;
+    [self endBackgroundTask];
+}
+
+
+
+
+
 
 
 

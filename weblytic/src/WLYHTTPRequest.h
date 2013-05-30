@@ -7,10 +7,17 @@
 
 #import <Foundation/Foundation.h>
 
-@interface WLYHTTPRequest : NSObject
+typedef enum {
+    WLYHTTPRequestStateReady = 1,
+    WLYHTTPRequestStateExecuting = 2,
+    WLYHTTPRequestStateStateFinished = 3
+} WLYHTTPRequestState;
 
+@interface WLYHTTPRequest : NSOperation <NSURLConnectionDataDelegate>
 
-- (NSData *)GZIPDataWithData:(NSData*)data;
-
+@property(nonatomic,strong) NSData *body;
+@property(nonatomic,readonly) WLYHTTPRequestState state;
 
 @end
+
+
