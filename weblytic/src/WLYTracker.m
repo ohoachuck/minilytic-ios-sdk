@@ -63,7 +63,10 @@
 - (NSDictionary *)eventWithName:(NSString *)eventName
 {
     NSDate *now = [[NSDate alloc] init];
+    
+    // Just testing purpose...
     now = [now dateByAddingTimeInterval:rand() % 10];
+    
     return @{@"type": @"event",
              @"name": eventName,
              @"date": [self.dateFormatter stringFromDate:now],
@@ -72,9 +75,13 @@
 
 - (NSData *)JSONDataWithTrackedItems
 {
+    NSString* appVersion = [[NSBundle mainBundle] infoDictionary][@"CFBundleVersion"];
+
     NSMutableDictionary *payloadDictionary = [NSMutableDictionary dictionary];
+    payloadDictionary[@"version"] = @"1";
     payloadDictionary[@"account.username"] = self.account;
     payloadDictionary[@"app.identifier"] = self.identifier;
+    payloadDictionary[@"app.version"] = appVersion;
     payloadDictionary[@"user.identifier"] = [WLYUser defaultUser].identifier;
     payloadDictionary[@"device.platform"] = [WLYDevice defaultDevice].platform;
     payloadDictionary[@"device.hardware_model"] = [WLYDevice defaultDevice].hardwareModel;

@@ -32,7 +32,7 @@
     
     // Initilialize our tracker
     WLYTracker* tracker = [WLYTracker defaultTracker];
-    tracker.account = @"jc@manbolo.com";
+    tracker.account = @"test@example.com";
     tracker.identifier = @"1";
     NSLog(@"defaultTracker: %@", tracker);
 

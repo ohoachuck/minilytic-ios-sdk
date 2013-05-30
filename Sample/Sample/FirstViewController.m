@@ -38,7 +38,7 @@
 
 - (IBAction)tap:(id)sender
 {
-    for(int i=0; i < 1024; i++){
+    for(int i=0; i < 100; i++){
         
         NSString *name = [NSString stringWithFormat:@"tab%d.button", rand() % 10];
         
