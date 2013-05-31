@@ -6,7 +6,7 @@
 //
 
 #import "FirstViewController.h"
-#import "WLYTracker.h"
+#import "MLYTracker.h"
 
 @interface FirstViewController ()
 
@@ -42,7 +42,7 @@
         
         NSString *name = [NSString stringWithFormat:@"tab%d.button", rand() % 10];
         
-        [[WLYTracker defaultTracker] trackEvent:name];
+        [[MLYTracker defaultTracker] trackEvent:name];
     }
 }
 @end

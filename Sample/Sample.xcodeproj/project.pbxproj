@@ -26,10 +26,6 @@
 		491836301753B55D001CE6B2 /* FirstViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4918362E1753B55D001CE6B2 /* FirstViewController_iPad.xib */; };
 		491836331753B55D001CE6B2 /* SecondViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 491836311753B55D001CE6B2 /* SecondViewController_iPhone.xib */; };
 		491836361753B55D001CE6B2 /* SecondViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 491836341753B55D001CE6B2 /* SecondViewController_iPad.xib */; };
-		4918363F1753B60E001CE6B2 /* WLYTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 4918363E1753B60E001CE6B2 /* WLYTracker.m */; };
-		491836421753D37C001CE6B2 /* WLYUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 491836411753D37C001CE6B2 /* WLYUser.m */; };
-		491836451753F47D001CE6B2 /* WLYDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 491836441753F47D001CE6B2 /* WLYDevice.m */; };
-		4918364817541C5D001CE6B2 /* WLYHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4918364717541C5D001CE6B2 /* WLYHTTPRequest.m */; };
 		4918364A17541D38001CE6B2 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4918364917541D38001CE6B2 /* libz.dylib */; };
 		49E8A0521756494B00AAE830 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 49E8A0511756494B00AAE830 /* README.md */; };
 /* End PBXBuildFile section */
@@ -60,14 +56,6 @@
 		4918362F1753B55D001CE6B2 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/FirstViewController_iPad.xib; sourceTree = "<group>"; };
 		491836321753B55D001CE6B2 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SecondViewController_iPhone.xib; sourceTree = "<group>"; };
 		491836351753B55D001CE6B2 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SecondViewController_iPad.xib; sourceTree = "<group>"; };
-		4918363D1753B60E001CE6B2 /* WLYTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WLYTracker.h; path = ../../weblytic/src/WLYTracker.h; sourceTree = "<group>"; };
-		4918363E1753B60E001CE6B2 /* WLYTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WLYTracker.m; path = ../../weblytic/src/WLYTracker.m; sourceTree = "<group>"; };
-		491836401753D37C001CE6B2 /* WLYUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WLYUser.h; path = ../../weblytic/src/WLYUser.h; sourceTree = "<group>"; };
-		491836411753D37C001CE6B2 /* WLYUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WLYUser.m; path = ../../weblytic/src/WLYUser.m; sourceTree = "<group>"; };
-		491836431753F47C001CE6B2 /* WLYDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WLYDevice.h; path = ../../weblytic/src/WLYDevice.h; sourceTree = "<group>"; };
-		491836441753F47D001CE6B2 /* WLYDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WLYDevice.m; path = ../../weblytic/src/WLYDevice.m; sourceTree = "<group>"; };
-		4918364617541C5D001CE6B2 /* WLYHTTPRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WLYHTTPRequest.h; path = ../../weblytic/src/WLYHTTPRequest.h; sourceTree = "<group>"; };
-		4918364717541C5D001CE6B2 /* WLYHTTPRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WLYHTTPRequest.m; path = ../../weblytic/src/WLYHTTPRequest.m; sourceTree = "<group>"; };
 		4918364917541D38001CE6B2 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		49E8A0511756494B00AAE830 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -119,7 +107,7 @@
 		4918360B1753B55D001CE6B2 /* Sample */ = {
 			isa = PBXGroup;
 			children = (
-				4918363C1753B5B1001CE6B2 /* weblytic */,
+				495D566C17581E6000AE4213 /* minilytic */,
 				491836141753B55D001CE6B2 /* AppDelegate.h */,
 				491836151753B55D001CE6B2 /* AppDelegate.m */,
 				4918361D1753B55D001CE6B2 /* FirstViewController.h */,
@@ -153,19 +141,11 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		4918363C1753B5B1001CE6B2 /* weblytic */ = {
+		495D566C17581E6000AE4213 /* minilytic */ = {
 			isa = PBXGroup;
 			children = (
-				4918363D1753B60E001CE6B2 /* WLYTracker.h */,
-				4918363E1753B60E001CE6B2 /* WLYTracker.m */,
-				491836401753D37C001CE6B2 /* WLYUser.h */,
-				491836411753D37C001CE6B2 /* WLYUser.m */,
-				491836431753F47C001CE6B2 /* WLYDevice.h */,
-				491836441753F47D001CE6B2 /* WLYDevice.m */,
-				4918364617541C5D001CE6B2 /* WLYHTTPRequest.h */,
-				4918364717541C5D001CE6B2 /* WLYHTTPRequest.m */,
 			);
-			name = weblytic;
+			name = minilytic;
 			sourceTree = "<group>";
 		};
 		49E8A0501756493200AAE830 /* Doc */ = {
@@ -255,10 +235,6 @@
 				491836161753B55D001CE6B2 /* AppDelegate.m in Sources */,
 				4918361F1753B55D001CE6B2 /* FirstViewController.m in Sources */,
 				491836261753B55D001CE6B2 /* SecondViewController.m in Sources */,
-				4918363F1753B60E001CE6B2 /* WLYTracker.m in Sources */,
-				491836421753D37C001CE6B2 /* WLYUser.m in Sources */,
-				491836451753F47D001CE6B2 /* WLYDevice.m in Sources */,
-				4918364817541C5D001CE6B2 /* WLYHTTPRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
