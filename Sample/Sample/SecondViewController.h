@@ -1,6 +1,6 @@
 //
 //  SecondViewController.h
-//  weblytic Sample
+//  minilytic Sample
 //
 //  Copyright (c) 2013 Manbolo. All rights reserved.
 //

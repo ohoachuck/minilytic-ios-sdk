@@ -27,6 +27,10 @@
 		491836331753B55D001CE6B2 /* SecondViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 491836311753B55D001CE6B2 /* SecondViewController_iPhone.xib */; };
 		491836361753B55D001CE6B2 /* SecondViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 491836341753B55D001CE6B2 /* SecondViewController_iPad.xib */; };
 		4918364A17541D38001CE6B2 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4918364917541D38001CE6B2 /* libz.dylib */; };
+		495D567517581FDD00AE4213 /* MLYDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 495D566E17581FDD00AE4213 /* MLYDevice.m */; };
+		495D567617581FDD00AE4213 /* MLYHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 495D567017581FDD00AE4213 /* MLYHTTPRequest.m */; };
+		495D567717581FDD00AE4213 /* MLYTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 495D567217581FDD00AE4213 /* MLYTracker.m */; };
+		495D567817581FDD00AE4213 /* MLYUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 495D567417581FDD00AE4213 /* MLYUser.m */; };
 		49E8A0521756494B00AAE830 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 49E8A0511756494B00AAE830 /* README.md */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +61,14 @@
 		491836321753B55D001CE6B2 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SecondViewController_iPhone.xib; sourceTree = "<group>"; };
 		491836351753B55D001CE6B2 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SecondViewController_iPad.xib; sourceTree = "<group>"; };
 		4918364917541D38001CE6B2 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		495D566D17581FDD00AE4213 /* MLYDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLYDevice.h; path = ../../minilytic/src/MLYDevice.h; sourceTree = "<group>"; };
+		495D566E17581FDD00AE4213 /* MLYDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MLYDevice.m; path = ../../minilytic/src/MLYDevice.m; sourceTree = "<group>"; };
+		495D566F17581FDD00AE4213 /* MLYHTTPRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLYHTTPRequest.h; path = ../../minilytic/src/MLYHTTPRequest.h; sourceTree = "<group>"; };
+		495D567017581FDD00AE4213 /* MLYHTTPRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MLYHTTPRequest.m; path = ../../minilytic/src/MLYHTTPRequest.m; sourceTree = "<group>"; };
+		495D567117581FDD00AE4213 /* MLYTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLYTracker.h; path = ../../minilytic/src/MLYTracker.h; sourceTree = "<group>"; };
+		495D567217581FDD00AE4213 /* MLYTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MLYTracker.m; path = ../../minilytic/src/MLYTracker.m; sourceTree = "<group>"; };
+		495D567317581FDD00AE4213 /* MLYUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLYUser.h; path = ../../minilytic/src/MLYUser.h; sourceTree = "<group>"; };
+		495D567417581FDD00AE4213 /* MLYUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MLYUser.m; path = ../../minilytic/src/MLYUser.m; sourceTree = "<group>"; };
 		49E8A0511756494B00AAE830 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -144,6 +156,14 @@
 		495D566C17581E6000AE4213 /* minilytic */ = {
 			isa = PBXGroup;
 			children = (
+				495D566D17581FDD00AE4213 /* MLYDevice.h */,
+				495D566E17581FDD00AE4213 /* MLYDevice.m */,
+				495D566F17581FDD00AE4213 /* MLYHTTPRequest.h */,
+				495D567017581FDD00AE4213 /* MLYHTTPRequest.m */,
+				495D567117581FDD00AE4213 /* MLYTracker.h */,
+				495D567217581FDD00AE4213 /* MLYTracker.m */,
+				495D567317581FDD00AE4213 /* MLYUser.h */,
+				495D567417581FDD00AE4213 /* MLYUser.m */,
 			);
 			name = minilytic;
 			sourceTree = "<group>";
@@ -235,6 +255,10 @@
 				491836161753B55D001CE6B2 /* AppDelegate.m in Sources */,
 				4918361F1753B55D001CE6B2 /* FirstViewController.m in Sources */,
 				491836261753B55D001CE6B2 /* SecondViewController.m in Sources */,
+				495D567517581FDD00AE4213 /* MLYDevice.m in Sources */,
+				495D567617581FDD00AE4213 /* MLYHTTPRequest.m in Sources */,
+				495D567717581FDD00AE4213 /* MLYTracker.m in Sources */,
+				495D567817581FDD00AE4213 /* MLYUser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
