@@ -1,5 +1,5 @@
 //
-//  WLYUser.h
+//  MLYUser.h
 //  weblytic iOS SDK
 //
 //  Copyright (c) 2013 Manbolo. All rights reserved.
@@ -7,17 +7,17 @@
 
 #import <Foundation/Foundation.h>
 
-/** Implements the singleton user `WLYUser`.
+/** Implements the singleton user `MLYUser`.
 
-This class is internal, uses `WLYTrcaker`instead.
+This class is internal, uses `MLYTrcaker`instead.
  
 This class represents the unique user of your application. It mains purpose is to create/register an UDID for the user. This UDID is stored under `NSUserDefaults, in "com.weblytic.udid" key.
 
 */
  
-@interface WLYUser : NSObject
+@interface MLYUser : NSObject
 
-+ (WLYUser *)defaultUser;
++ (MLYUser *)defaultUser;
 
 @property(readonly) NSString *identifier;
 

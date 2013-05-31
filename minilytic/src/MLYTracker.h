@@ -1,5 +1,5 @@
 //
-//  WLYTracker.h
+//  MLYTracker.h
 //  weblytic iOS SDK
 //
 //  Copyright (c) 2013 Manbolo. All rights reserved.
@@ -8,28 +8,28 @@
 #import <Foundation/Foundation.h>
 
 
-/** Implements the singleton tracker `WLYTracker`.
+/** Implements the singleton tracker `MLYTracker`.
  
 This class is your unique entry point to send tracking event. You do not need to know any other classes. Really.
 
 You simply track an event like this:
  
-	WLYTracker *tracker = [WLYTracker defaultTracker];
+	MLYTracker *tracker = [MLYTracker defaultTracker];
 	[tracker trackEvent:@"tab1.buttonOk"];
  
 Tracking an event is just recording a lightweight instance of this event in memory. At this point, there is no network connection involved. You are the responsible for sending all event to the server, by using `sendTrackedItems` on the singleton tracker. Tracked event are then sent in bulk, with a compressed gzip payload. A typical implementation is to send tracked items when the app goes in background (i.e. in `applicationDidEnterBackground:` and `applicationWillTerminate:`).
 
 To track session, you must track "app.foreground" event in `application:didFinishLaunchingWithOptions:` and in `applicationWillEnterForeground:` in your app delegate:
  
-	WLYTracker *tracker = [WLYTracker defaultTracker];
+	MLYTracker *tracker = [MLYTracker defaultTracker];
 	[tracker trackEvent:@"app.foreground"];
  
 You must also send the event "app.background" in `applicationDidEnterBackground:` and in `applicationWillTerminate:` in your app delegate. These selectors are also the best place to send tracked items, so a typical implementation of `applicationDidEnterBackground:` is:
  
 	- (void)applicationDidEnterBackground:(UIApplication *)application
 	{
-		[[WLYTracker defaultTracker] trackEvent:@"app.background"];
-		[[WLYTracker defaultTracker] sendTrackedItems];
+		[[MLYTracker defaultTracker] trackEvent:@"app.background"];
+		[[MLYTracker defaultTracker] sendTrackedItems];
 	}
 
 You must also provide your account username and the app identifier of your app. You can initilialize this value in `application:didFinishLaunchingWithOptions:` like this:
@@ -42,7 +42,7 @@ You must also provide your account username and the app identifier of your app. 
 		[self.window makeKeyAndVisible];
 
 		// Initilialize our tracker
-		WLYTracker* tracker = [WLYTracker defaultTracker];
+		MLYTracker* tracker = [MLYTracker defaultTracker];
 		tracker.account = @"bob@gmail.com";
 		tracker.identifier = @"1";
 
@@ -53,7 +53,7 @@ You must also provide your account username and the app identifier of your app. 
 
 */
 
-@interface WLYTracker : NSObject
+@interface MLYTracker : NSObject
 
 ///---------------------------------------------------------------------------------------
 /// @name Initialization & disposal
@@ -61,7 +61,7 @@ You must also provide your account username and the app identifier of your app. 
  
 /** Returns the singleton instance of the tracker. */
 
-+ (WLYTracker*)defaultTracker;
++ (MLYTracker*)defaultTracker;
 
 /** Specifies the identifier of your weblytic account */
 @property(copy) NSString *account;

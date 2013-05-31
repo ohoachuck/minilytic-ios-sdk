@@ -1,21 +1,21 @@
 //
-//  WLYDevice.m
+//  MLYDevice.m
 //  weblytic iOS SDK
 //
 //  Created by Jean-Christophe Amiel on 5/27/13.
 //  Copyright (c) 2013 Manbolo. All rights reserved.
 //
 
-#import "WLYDevice.h"
+#import "MLYDevice.h"
 #include <sys/sysctl.h>
 
-@implementation WLYDevice
+@implementation MLYDevice
 
-+ (WLYDevice *)defaultDevice {
++ (MLYDevice *)defaultDevice {
     static dispatch_once_t onceToken;
-    static WLYDevice *device = nil;
+    static MLYDevice *device = nil;
     dispatch_once(&onceToken, ^{
-        device = [[WLYDevice alloc] init];
+        device = [[MLYDevice alloc] init];
     });
     return device;
 }

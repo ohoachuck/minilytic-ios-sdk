@@ -1,26 +1,24 @@
 //
-//  WLYHTTPRequest.m
+//  MLYHTTPRequest.m
 //  weblytic iOS SDK
 //
 //  Copyright (c) 2013 Manbolo. All rights reserved.
 //
 
-#import "WLYHTTPRequest.h"
+#import "MLYHTTPRequest.h"
 
 
 
-@interface WLYHTTPRequest ( )
+@interface MLYHTTPRequest ( )
 
 @property(nonatomic,assign) UIBackgroundTaskIdentifier backgroundTaskId;
 @property(nonatomic,strong) NSMutableURLRequest *request;
 @property(nonatomic,strong) NSURLConnection *connection;
-@property(nonatomic,assign) WLYHTTPRequestState state;
-
 
 @end
 
 
-@implementation WLYHTTPRequest
+@implementation MLYHTTPRequest
 
 #pragma mark - Entry point
 
@@ -28,12 +26,22 @@
 {
     self = [super init];
     if (self){
-        NSURL *url = [NSURL URLWithString:@"http://weblytic.com/api/v1/hits/"];
+        NSURL *url = [NSURL URLWithString:@"http://minilytic.com/api/v1/hits/"];
         _request = [NSMutableURLRequest requestWithURL:url];
         [_request setHTTPMethod:@"POST"];
-        _state = WLYHTTPRequestStateReady;
     }
     return self;
+}
+
+- (void)setUsingLocalhost:(BOOL)usingLocalhost
+{
+    _usingLocalhost = usingLocalhost;
+    NSURL *url = self.isUsingLocalhost ?
+        [NSURL URLWithString:@"http://localhost:8000/api/v1/hits/"] :
+        [NSURL URLWithString:@"http://minilytic.com/api/v1/hits/"];
+    self.request = [NSMutableURLRequest requestWithURL:url];
+    [self.request setHTTPMethod:@"POST"];
+
 }
 
 - (void)main
@@ -55,7 +63,6 @@
         });
     }];
     
-    
     if(!self.isCancelled) {
         [self.request setHTTPBody:self.body];
         
@@ -69,36 +76,12 @@
             
             [self.connection start];
         });
-        self.state = WLYHTTPRequestStateExecuting;
     }
     else {
-        self.state =WLYHTTPRequestStateStateFinished;
         [self endBackgroundTask];
     }
 }
 
-#pragma - mark NSOperation stuff
-
-- (BOOL)isConcurrent
-{
-    return YES;
-}
-
-- (BOOL)isReady {
-    
-    return (self.state == WLYHTTPRequestStateReady && [super isReady]);
-}
-
-
-- (BOOL)isFinished
-{
-    return (self.state == WLYHTTPRequestStateStateFinished);
-}
-
-- (BOOL)isExecuting {
-    
-    return (self.state == WLYHTTPRequestStateExecuting);
-}
 
 - (void)endBackgroundTask
 {
@@ -118,16 +101,10 @@
     @synchronized(self) {
         //self.isCancelled = YES;
         [self.connection cancel];
-        if(self.state == WLYHTTPRequestStateExecuting){
-            self.state = WLYHTTPRequestStateStateFinished;
-        }
         [self endBackgroundTask];
     }
     [super cancel];
 }
-
-#pragma mark -
-#pragma mark NSURLConnection delegates
 
 #pragma mark -
 #pragma mark NSURLConnection delegates

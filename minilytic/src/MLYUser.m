@@ -1,19 +1,19 @@
 //
-//  WLYUser.m
+//  MLYUser.m
 //  weblytic iOS SDK
 //
 //  Copyright (c) 2013 Manbolo. All rights reserved.
 //
 
-#import "WLYUser.h"
+#import "MLYUser.h"
 
-@implementation WLYUser
+@implementation MLYUser
 
-+ (WLYUser *)defaultUser {
++ (MLYUser *)defaultUser {
     static dispatch_once_t onceToken;
-    static WLYUser *defaultUser = nil;
+    static MLYUser *defaultUser = nil;
     dispatch_once(&onceToken, ^{
-        defaultUser = [[WLYUser alloc] init];
+        defaultUser = [[MLYUser alloc] init];
     });
     return defaultUser;
 }

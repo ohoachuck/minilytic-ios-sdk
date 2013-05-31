@@ -1,5 +1,5 @@
 //
-//  WLYDevice.h
+//  MLYDevice.h
 //  weblytic iOS SDK
 //
 //  Copyright (c) 2013 Manbolo. All rights reserved.
@@ -7,9 +7,9 @@
 
 #import <Foundation/Foundation.h>
 
-@interface WLYDevice : NSObject
+@interface MLYDevice : NSObject
 
-+ (WLYDevice *)defaultDevice;
++ (MLYDevice *)defaultDevice;
 
 - (NSString *)platform;
 - (NSString *)hardwareModel;

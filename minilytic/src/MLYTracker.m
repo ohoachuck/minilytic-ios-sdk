@@ -1,31 +1,32 @@
 //
-//  WLYTracker.m
+//  MLYTracker.m
 //  weblytic iOS SDK
 //
 //  Copyright (c) 2013 Manbolo. All rights reserved.
 //
-#import "WLYTracker.h"
-#import "WLYUser.h"
-#import "WLYDevice.h"
-#import "WLYHTTPRequest.h"
+#import "MLYTracker.h"
+#import "MLYUser.h"
+#import "MLYDevice.h"
+#import "MLYHTTPRequest.h"
 #import <zlib.h>
 
-@interface WLYTracker ()
+@interface MLYTracker ()
 
 @property(strong) NSMutableArray *trackedItems;
 @property(strong) NSDateFormatter *dateFormatter;
+@property(strong) NSOperationQueue *requestsQueue;
 
 @end
 
 
 
-@implementation WLYTracker
+@implementation MLYTracker
 
-+ (WLYTracker *)defaultTracker {
++ (MLYTracker *)defaultTracker {
     static dispatch_once_t onceToken;
-    static WLYTracker *tracker = nil;
+    static MLYTracker *tracker = nil;
     dispatch_once(&onceToken, ^{
-        tracker = [[WLYTracker alloc] init];
+        tracker = [[MLYTracker alloc] init];
     });
     return tracker;
 }
@@ -38,6 +39,7 @@
         _dateFormatter = [[NSDateFormatter alloc] init];
         [_dateFormatter setDateFormat:@"yyyy-MM-dd hh:mm:ss Z"];
         _dateFormatter.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];
+        _requestsQueue = [[NSOperationQueue alloc] init];
     }
     return self;
 }
@@ -84,11 +86,11 @@
     payloadDictionary[@"account.username"] = self.account;
     payloadDictionary[@"app.identifier"] = self.identifier;
     payloadDictionary[@"app.version"] = appVersion;
-    payloadDictionary[@"user.identifier"] = [WLYUser defaultUser].identifier;
-    payloadDictionary[@"device.platform"] = [WLYDevice defaultDevice].platform;
-    payloadDictionary[@"device.hardware_model"] = [WLYDevice defaultDevice].hardwareModel;
-    payloadDictionary[@"device.system_version"] = [WLYDevice defaultDevice].systemVersion;
-    payloadDictionary[@"device.system_name"] = [WLYDevice defaultDevice].systemName;
+    payloadDictionary[@"user.identifier"] = [MLYUser defaultUser].identifier;
+    payloadDictionary[@"device.platform"] = [MLYDevice defaultDevice].platform;
+    payloadDictionary[@"device.hardware_model"] = [MLYDevice defaultDevice].hardwareModel;
+    payloadDictionary[@"device.system_version"] = [MLYDevice defaultDevice].systemVersion;
+    payloadDictionary[@"device.system_name"] = [MLYDevice defaultDevice].systemName;
     payloadDictionary[@"items"] = self.trackedItems;
 
     NSError *writeError = nil;
@@ -117,9 +119,10 @@
     NSData *jsonData = [self JSONDataWithTrackedItems];
     NSData *gzipData = [self GZIPDataWithData:jsonData];
     
-    WLYHTTPRequest *request = [[WLYHTTPRequest alloc] init];
+    MLYHTTPRequest *request = [[MLYHTTPRequest alloc] init];
+    request.usingLocalhost = YES;
     request.body = gzipData;
-    [request start];
+    [self.requestsQueue addOperation:request];
     
 }
 
