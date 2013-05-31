@@ -1,14 +1,14 @@
-weblytic iOS SDK
+minilytic iOS SDK
 ================
 
-Analytics for the anti-analytics
+Mini footprint app analytics
 
-This open-source library allows you to integrate weblytic analytics SDK into your iOS app.
+This open-source library allows you to integrate minilytic analytics SDK into your iOS app.
 
 You simply track an event like this:
  
 ```objectice-c
-WLYTracker *tracker = [WLYTracker defaultTracker];
+MLYTracker *tracker = [MLYTracker defaultTracker];
 [tracker trackEvent:@"tab1.buttonOk"];
 ```
 
@@ -16,7 +16,7 @@ Tracking an event is just recording a lightweight instance of this event in memo
 
 TRY IT OUT
 
-1. Test your install; build and run the project at ~/Documents/weblytic-ios-sdk/Sample/Sample.xcodeproj
+1. Test your install; build and run the project at ~/Documents/minilytic-ios-sdk/Sample/Sample.xcodeproj
 2. There is no step 2.
 
 ## Requirements
@@ -27,4 +27,4 @@ TRY IT OUT
 
 ## License
 
-weblytic iOS SDK is available under the [WTFPL license](http://en.wikipedia.org/wiki/WTFPL). See the LICENSE file for more info.
+minilytic iOS SDK is available under the DWYW license. See the LICENSE file for more info.
