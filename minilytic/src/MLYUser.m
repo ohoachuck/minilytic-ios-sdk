@@ -1,6 +1,6 @@
 //
 //  MLYUser.m
-//  weblytic iOS SDK
+//  minilytic iOS SDK
 //
 //  Copyright (c) 2013 Manbolo. All rights reserved.
 //
@@ -22,13 +22,13 @@
 {
     self = [super init];
     if (self){
-        // Get the udid key
+        // Get the UDID key
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        NSString *udidString = [defaults objectForKey:@"com.weblytic.udid"];
+        NSString *udidString = [defaults objectForKey:@"com.minilytic.udid"];
         if (!udidString){
             CFUUIDRef identifierObject = CFUUIDCreate(kCFAllocatorDefault);
             udidString = (__bridge_transfer NSString *)CFUUIDCreateString(kCFAllocatorDefault,identifierObject);
-            [defaults setObject:udidString forKey:@"com.weblytic.udid"];
+            [defaults setObject:udidString forKey:@"com.minilytic.udid"];
             [defaults synchronize];
             CFRelease((CFTypeRef) identifierObject);
         }

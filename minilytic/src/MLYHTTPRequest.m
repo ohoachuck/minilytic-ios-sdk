@@ -1,6 +1,6 @@
 //
 //  MLYHTTPRequest.m
-//  weblytic iOS SDK
+//  minilytic iOS SDK
 //
 //  Copyright (c) 2013 Manbolo. All rights reserved.
 //
@@ -26,22 +26,29 @@
 {
     self = [super init];
     if (self){
-        NSURL *url = [NSURL URLWithString:@"http://minilytic.com/api/v1/hits/"];
-        _request = [NSMutableURLRequest requestWithURL:url];
-        [_request setHTTPMethod:@"POST"];
+        _usingLocalhost = NO;
+        _request = [self requestWithURLString:@"http://minilytic.com/api/v1/hits/"];
     }
     return self;
 }
 
+- (NSMutableURLRequest *)requestWithURLString:(NSString*)urlString
+{
+    NSURL *url = [NSURL URLWithString:urlString];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:@"gzip" forHTTPHeaderField:@"Content-Encoding"];
+    [request setValue:@"text/json" forHTTPHeaderField:@"Content-Type"];
+    return request;
+}
+
+
 - (void)setUsingLocalhost:(BOOL)usingLocalhost
 {
     _usingLocalhost = usingLocalhost;
-    NSURL *url = self.isUsingLocalhost ?
-        [NSURL URLWithString:@"http://localhost:8000/api/v1/hits/"] :
-        [NSURL URLWithString:@"http://minilytic.com/api/v1/hits/"];
-    self.request = [NSMutableURLRequest requestWithURL:url];
-    [self.request setHTTPMethod:@"POST"];
-
+    self.request = self.isUsingLocalhost ?
+        [self requestWithURLString:@"http://localhost:8000/api/v1/hits/"] :
+        [self requestWithURLString:@"http://minilytic.com/api/v1/hits/"];
 }
 
 - (void)main

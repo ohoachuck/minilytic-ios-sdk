@@ -1,6 +1,6 @@
 //
 //  MLYHTTPRequest.h
-//  weblytic iOS SDK
+//  minilytic iOS SDK
 //
 //  Copyright (c) 2013 Manbolo. All rights reserved.
 //

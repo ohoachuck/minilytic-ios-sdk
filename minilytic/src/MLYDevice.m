@@ -1,6 +1,6 @@
 //
 //  MLYDevice.m
-//  weblytic iOS SDK
+//  minilytic iOS SDK
 //
 //  Created by Jean-Christophe Amiel on 5/27/13.
 //  Copyright (c) 2013 Manbolo. All rights reserved.

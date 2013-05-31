@@ -38,11 +38,7 @@
 
 - (IBAction)tap:(id)sender
 {
-    for(int i=0; i < 100; i++){
-        
-        NSString *name = [NSString stringWithFormat:@"tab%d.button", rand() % 10];
-        
-        [[MLYTracker defaultTracker] trackEvent:name];
-    }
+    NSString *name = [NSString stringWithFormat:@"tab%d.button", rand() % 10];
+    [[MLYTracker defaultTracker] trackEvent:name];
 }
 @end

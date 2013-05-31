@@ -1,6 +1,6 @@
 //
 //  MLYTracker.h
-//  weblytic iOS SDK
+//  minilytic iOS SDK
 //
 //  Copyright (c) 2013 Manbolo. All rights reserved.
 //
@@ -43,8 +43,8 @@ You must also provide your account username and the app identifier of your app. 
 
 		// Initilialize our tracker
 		MLYTracker* tracker = [MLYTracker defaultTracker];
-		tracker.account = @"bob@gmail.com";
-		tracker.identifier = @"1";
+		tracker.accountKey = @"bob@gmail.com";
+		tracker.appIdentifier = @"1";
 
 		[tracker trackEvent:@"app.foreground"];
 	
@@ -63,11 +63,11 @@ You must also provide your account username and the app identifier of your app. 
 
 + (MLYTracker*)defaultTracker;
 
-/** Specifies the identifier of your weblytic account */
-@property(copy) NSString *account;
+/** Specifies the identifier of your minilytic account */
+@property(copy) NSString *accountKey;
 
 /** Specifies the identifier of your app */
-@property(copy) NSString *identifier;
+@property(copy) NSString *appIdentifier;
 
 ///---------------------------------------------------------------------------------------
 /// @name Tracking items

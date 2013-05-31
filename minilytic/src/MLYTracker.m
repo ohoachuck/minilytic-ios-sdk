@@ -1,6 +1,6 @@
 //
 //  MLYTracker.m
-//  weblytic iOS SDK
+//  minilytic iOS SDK
 //
 //  Copyright (c) 2013 Manbolo. All rights reserved.
 //
@@ -67,10 +67,6 @@
 - (NSDictionary *)eventWithName:(NSString *)eventName
 {
     NSDate *now = [[NSDate alloc] init];
-    
-    // Just testing purpose...
-    now = [now dateByAddingTimeInterval:rand() % 10];
-    
     return @{@"type": @"event",
              @"name": eventName,
              @"date": [self.dateFormatter stringFromDate:now],
@@ -83,8 +79,8 @@
 
     NSMutableDictionary *payloadDictionary = [NSMutableDictionary dictionary];
     payloadDictionary[@"version"] = @"1";
-    payloadDictionary[@"account.username"] = self.account;
-    payloadDictionary[@"app.identifier"] = self.identifier;
+    payloadDictionary[@"account.key"] = self.accountKey;
+    payloadDictionary[@"app.identifier"] = self.appIdentifier;
     payloadDictionary[@"app.version"] = appVersion;
     payloadDictionary[@"user.identifier"] = [MLYUser defaultUser].identifier;
     payloadDictionary[@"device.platform"] = [MLYDevice defaultDevice].platform;

@@ -32,8 +32,8 @@
     
     // Initilialize our tracker
     MLYTracker* tracker = [MLYTracker defaultTracker];
-    tracker.account = @"test@example.com";
-    tracker.identifier = @"1";
+    tracker.accountKey = @"yuytsfuytfbt";
+    tracker.appIdentifier = @"1";
     NSLog(@"defaultTracker: %@", tracker);
 
     
