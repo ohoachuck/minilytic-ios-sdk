@@ -104,19 +104,6 @@ You must also provide your account username and the app identifier of your app. 
 
 - (void)trackPage:(NSString *)pageName customMetrics:(NSDictionary *)dic;
 
-///---------------------------------------------------------------------------------------
-/// @name Sending tracked items
-///---------------------------------------------------------------------------------------
-
-/** Send tracked items on the network and flush the in-memory tracked items queue.
-
-@see trackEvent:
-@see trackPage:customMetrics:
-@see trackPage:customMetrics:
-@see sendTrackedItems
-*/
-
-- (void)sendTrackedItems;
 
 
 

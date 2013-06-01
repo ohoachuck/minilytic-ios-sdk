@@ -22,6 +22,8 @@
 
 @implementation MLYTracker
 
+#pragma mark - alloc / init
+
 + (MLYTracker *)defaultTracker {
     static dispatch_once_t onceToken;
     static MLYTracker *tracker = nil;
@@ -40,10 +42,65 @@
         [_dateFormatter setDateFormat:@"yyyy-MM-dd hh:mm:ss Z"];
         _dateFormatter.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];
         _requestsQueue = [[NSOperationQueue alloc] init];
+        [self registerToNotifications];
     }
     return self;
 }
 
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+#pragma mark - Background / Foreground
+- (void)registerToNotifications
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(applicationWillEnterForeground:)
+                                                 name:UIApplicationWillEnterForegroundNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(applicationDidEnterBackground:)
+                                                 name:UIApplicationDidEnterBackgroundNotification
+                                               object:nil];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(applicationWillTerminate:)
+                                                 name:UIApplicationWillTerminateNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(applicationDidFinishLaunching:)
+                                                 name:UIApplicationDidFinishLaunchingNotification
+                                               object:nil];
+
+}
+
+
+- (void)applicationWillEnterForeground:(NSNotification *)theNotification
+{
+    [self trackEvent:@"app.foreground"];
+}
+
+- (void)applicationDidEnterBackground:(NSNotification *)theNotification
+{
+    [self trackEvent:@"app.background"];
+    [self sendTrackedItems];
+}
+
+- (void)applicationWillTerminate:(NSNotification *)theNotification
+{
+    [self trackEvent:@"app.background"];
+    [self sendTrackedItems];
+}
+
+- (void)applicationDidFinishLaunching:(NSNotification *)theNotification
+{
+    [self trackEvent:@"app.foreground"];
+}
+
+#pragma mark - Track event / page
 - (void)trackPage:(NSString *)name
 {
     [self trackPage:name customMetrics:nil];
