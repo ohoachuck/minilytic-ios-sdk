@@ -32,7 +32,7 @@
     
     // Initilialize our tracker
     MLYTracker* tracker = [MLYTracker defaultTracker];
-    tracker.accountKey = @"yuytsfuytfbt";
+    tracker.accountKey = @"PV6IES01";
     tracker.appIdentifier = @"1";
 
     
