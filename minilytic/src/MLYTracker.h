@@ -17,22 +17,17 @@ You simply track an event like this:
 	MLYTracker *tracker = [MLYTracker defaultTracker];
 	[tracker trackEvent:@"tab1.buttonOk"];
  
-Tracking an event is just recording a lightweight instance of this event in memory. At this point, there is no network connection involved. You are the responsible for sending all event to the server, by using `sendTrackedItems` on the singleton tracker. Tracked event are then sent in bulk, with a compressed gzip payload. A typical implementation is to send tracked items when the app goes in background (i.e. in `applicationDidEnterBackground:` and `applicationWillTerminate:`).
+Tracking an event is just recording a lightweight instance of this event in memory. At this point, there is no network connection involved. When your app goes into background, all tracked event are sent to the server, in a gzip compressed payload. You do not need to sent the  events manually, as the singleton tracker registers to some notifications.
 
-To track session, you must track "app.foreground" event in `application:didFinishLaunchingWithOptions:` and in `applicationWillEnterForeground:` in your app delegate:
+When first initialized, the singleton tracker will register to the following notifications:
  
-	MLYTracker *tracker = [MLYTracker defaultTracker];
-	[tracker trackEvent:@"app.foreground"];
+1. `UIApplicationWillEnterForegroundNotification` will generate an "app.foreground" event
+2. `UIApplicationDidEnterBackgroundNotification` will generate an "app.background" event and will send tracked items over the network
+3. `UIApplicationDidFinishLaunchingNotification` will generate an "app.foreground" event
+4. `UIApplicationWillTerminateNotification` will generate an "app.background" event and will send tracked items over the network
  
-You must also send the event "app.background" in `applicationDidEnterBackground:` and in `applicationWillTerminate:` in your app delegate. These selectors are also the best place to send tracked items, so a typical implementation of `applicationDidEnterBackground:` is:
- 
-	- (void)applicationDidEnterBackground:(UIApplication *)application
-	{
-		[[MLYTracker defaultTracker] trackEvent:@"app.background"];
-		[[MLYTracker defaultTracker] sendTrackedItems];
-	}
 
-You must also provide your account username and the app identifier of your app. You can initilialize this value in `application:didFinishLaunchingWithOptions:` like this:
+You must provide your minilytic account key and the app identifier of your app. You can initilialize this value in `application:didFinishLaunchingWithOptions:` like this:
  
 	(BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 	{
@@ -43,13 +38,15 @@ You must also provide your account username and the app identifier of your app. 
 
 		// Initilialize our tracker
 		MLYTracker* tracker = [MLYTracker defaultTracker];
-		tracker.accountKey = @"bob@gmail.com";
+		tracker.accountKey = @"PV6IES01";
 		tracker.appIdentifier = @"1";
 
 		[tracker trackEvent:@"app.foreground"];
 	
 		return YES;
 	}
+ 
+You can use "PV6IES01" as a public account key for testing purposes.
 
 */
 
@@ -73,33 +70,30 @@ You must also provide your account username and the app identifier of your app. 
 /// @name Tracking items
 ///---------------------------------------------------------------------------------------
 
-/** Tracks a named event. Tracked event are added to a memory queue and send on demand with `sendTrackedItems:`
+/** Tracks a named event. Tracked event are added to a memory queue and end when application goes into background.
  
 @param eventName Name of the event to track.
 @see trackPage:
 @see trackPage:customMetrics:
-@see sendTrackedItems
 */
 - (void)trackEvent:(NSString* )eventName;
 
 
-/** Tracks a named page. Tracked page are added to a memory queue and send on demand with `sendTrackedItems:`
+/** Tracks a named page. Tracked page are added to a memory queue and send when application goes into background.
  
 @param pageName Name of the page to track.
 @see trackEvent:
 @see trackPage:customMetrics:
-@see sendTrackedItems
 */
 - (void)trackPage:(NSString *)pageName;
 
 
-/** Tracks a named page with a custom metrics. Tracked page are added to a memory queue and send on demand with `sendTrackedItems`
+/** Tracks a named page with a custom metrics. Tracked page are added to a memory queue and send when application goes into background.
  
 @param pageName Name of the page to track.
 @param dic Dictionary of key/value for a custom metrics.
 @see trackEvent:
 @see trackPage:customMetrics:
-@see sendTrackedItems
 */
 
 - (void)trackPage:(NSString *)pageName customMetrics:(NSDictionary *)dic;
