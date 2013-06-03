@@ -39,7 +39,7 @@
     if (self){
         _trackedItems = [NSMutableArray array];
         _dateFormatter = [[NSDateFormatter alloc] init];
-        [_dateFormatter setDateFormat:@"yyyy-MM-dd hh:mm:ss Z"];
+        [_dateFormatter setDateFormat:@"yyyy-MM-dd hh:mm:ssZ"];
         _dateFormatter.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];
         _requestsQueue = [[NSOperationQueue alloc] init];
         [self registerToNotifications];
@@ -173,9 +173,10 @@
     NSData *gzipData = [self GZIPDataWithData:jsonData];
     
     MLYHTTPRequest *request = [[MLYHTTPRequest alloc] init];
-    request.usingLocalhost = YES;
+    request.usingLocalhost = NO;
     request.body = gzipData;
     [self.requestsQueue addOperation:request];
+    [self.trackedItems removeAllObjects];
     
 }
 
