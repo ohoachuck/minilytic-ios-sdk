@@ -41,8 +41,6 @@ You must provide your minilytic account key and the app identifier of your app. 
 		tracker.accountKey = @"PV6IES01";
 		tracker.appIdentifier = @"1";
 
-		[tracker trackEvent:@"app.foreground"];
-	
 		return YES;
 	}
  
