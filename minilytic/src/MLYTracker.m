@@ -173,7 +173,7 @@
     NSData *gzipData = [self GZIPDataWithData:jsonData];
     
     MLYHTTPRequest *request = [[MLYHTTPRequest alloc] init];
-    request.usingLocalhost = NO;
+    request.usingLocalhost = YES;
     request.body = gzipData;
     [self.requestsQueue addOperation:request];
     [self.trackedItems removeAllObjects];
