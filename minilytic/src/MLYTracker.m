@@ -171,6 +171,8 @@
 {
     NSData *jsonData = [self JSONDataWithTrackedItems];
     NSData *gzipData = [self GZIPDataWithData:jsonData];
+    NSString *jsonString = [self JSONStringWithTrackedItems];
+    NSLog(@"%@", jsonString);
     
     MLYHTTPRequest *request = [[MLYHTTPRequest alloc] init];
     request.usingLocalhost = YES;

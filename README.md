@@ -1,3 +1,7 @@
+<p align="center" >
+</p>
+
+
 minilytic iOS SDK
 ================
 
