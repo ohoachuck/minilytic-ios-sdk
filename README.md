@@ -1,4 +1,5 @@
 <p align="center" >
+<img src="https://github.com/manbolo/minilytic-ios-sdk/blob/master/minilytic/logo.png" alt="minilytic" title="minilytic">
 </p>
 
 
