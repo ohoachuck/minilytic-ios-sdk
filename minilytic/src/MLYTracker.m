@@ -116,7 +116,7 @@
 - (void)trackEvent:(NSString *)eventName
 {
     NSDictionary *event = [self eventWithName:eventName];
-    [self.trackedItems addObject:event];
+    [_trackedItems addObject:event];
     NSLog(@"trackEvent: %@", event);
 }
 
@@ -126,7 +126,7 @@
     NSDate *now = [[NSDate alloc] init];
     return @{@"type": @"event",
              @"name": eventName,
-             @"date": [self.dateFormatter stringFromDate:now],
+             @"date": [_dateFormatter stringFromDate:now],
              };
 }
 
@@ -136,15 +136,15 @@
 
     NSMutableDictionary *payloadDictionary = [NSMutableDictionary dictionary];
     payloadDictionary[@"version"] = @"1";
-    payloadDictionary[@"account.key"] = self.accountKey;
-    payloadDictionary[@"app.identifier"] = self.appIdentifier;
+    payloadDictionary[@"account.key"] = _accountKey;
+    payloadDictionary[@"app.identifier"] = _appIdentifier;
     payloadDictionary[@"app.version"] = appVersion;
     payloadDictionary[@"user.identifier"] = [MLYUser defaultUser].identifier;
     payloadDictionary[@"device.platform"] = [MLYDevice defaultDevice].platform;
     payloadDictionary[@"device.hardware_model"] = [MLYDevice defaultDevice].hardwareModel;
     payloadDictionary[@"device.system_version"] = [MLYDevice defaultDevice].systemVersion;
     payloadDictionary[@"device.system_name"] = [MLYDevice defaultDevice].systemName;
-    payloadDictionary[@"items"] = self.trackedItems;
+    payloadDictionary[@"items"] = _trackedItems;
 
     NSError *writeError = nil;
     NSData  *jsonData = [NSJSONSerialization dataWithJSONObject:payloadDictionary
@@ -177,8 +177,8 @@
     MLYHTTPRequest *request = [[MLYHTTPRequest alloc] init];
     request.usingLocalhost = YES;
     request.body = gzipData;
-    [self.requestsQueue addOperation:request];
-    [self.trackedItems removeAllObjects];
+    [_requestsQueue addOperation:request];
+    [_trackedItems removeAllObjects];
     
 }
 

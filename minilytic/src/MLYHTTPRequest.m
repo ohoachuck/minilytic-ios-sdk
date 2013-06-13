@@ -46,7 +46,7 @@
 - (void)setUsingLocalhost:(BOOL)usingLocalhost
 {
     _usingLocalhost = usingLocalhost;
-    self.request = self.isUsingLocalhost ?
+    _request = self.isUsingLocalhost ?
         [self requestWithURLString:@"http://localhost:8000/api/v1/hits/"] :
         [self requestWithURLString:@"http://minilytic.com/api/v1/hits/"];
 }
@@ -60,28 +60,28 @@
 
 - (void) start
 {
-    self.backgroundTaskId = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+    _backgroundTaskId = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
         dispatch_async(dispatch_get_main_queue(), ^{
-            if (self.backgroundTaskId != UIBackgroundTaskInvalid){
-                [[UIApplication sharedApplication] endBackgroundTask:self.backgroundTaskId];
-                self.backgroundTaskId = UIBackgroundTaskInvalid;
+            if (_backgroundTaskId != UIBackgroundTaskInvalid){
+                [[UIApplication sharedApplication] endBackgroundTask:_backgroundTaskId];
+                _backgroundTaskId = UIBackgroundTaskInvalid;
                 [self cancel];
             }
         });
     }];
     
     if(!self.isCancelled) {
-        [self.request setHTTPBody:self.body];
+        [_request setHTTPBody:_body];
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            self.connection = [[NSURLConnection alloc] initWithRequest:self.request
-                                                              delegate:self
-                                                      startImmediately:NO];
+            _connection = [[NSURLConnection alloc] initWithRequest:_request
+                                                          delegate:self
+                                                  startImmediately:NO];
             
-            [self.connection scheduleInRunLoop:[NSRunLoop currentRunLoop]
-                                       forMode:NSRunLoopCommonModes];
+            [_connection scheduleInRunLoop:[NSRunLoop currentRunLoop]
+                                   forMode:NSRunLoopCommonModes];
             
-            [self.connection start];
+            [_connection start];
         });
     }
     else {
@@ -93,9 +93,9 @@
 - (void)endBackgroundTask
 {
     dispatch_async(dispatch_get_main_queue(), ^{
-        if (self.backgroundTaskId != UIBackgroundTaskInvalid) {
-            [[UIApplication sharedApplication] endBackgroundTask:self.backgroundTaskId];
-            self.backgroundTaskId = UIBackgroundTaskInvalid;
+        if (_backgroundTaskId != UIBackgroundTaskInvalid) {
+            [[UIApplication sharedApplication] endBackgroundTask:_backgroundTaskId];
+            _backgroundTaskId = UIBackgroundTaskInvalid;
         }
     });
 }
@@ -107,7 +107,7 @@
     
     @synchronized(self) {
         //self.isCancelled = YES;
-        [self.connection cancel];
+        [_connection cancel];
         [self endBackgroundTask];
     }
     [super cancel];
@@ -118,13 +118,13 @@
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
-    self.body = nil;
+    _body = nil;
     [self endBackgroundTask];
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
-    self.body = nil;
+    _body = nil;
     [self endBackgroundTask];
 }
 
